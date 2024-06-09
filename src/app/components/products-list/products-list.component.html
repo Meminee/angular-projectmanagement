@@ -1,0 +1,61 @@
+<div class="list row">
+    <div class="col-md-8">
+      <div class="input-group mb-3">
+
+        <input type="text" class="form-control" placeholder="Rechercher par le nom du produit..." [(ngModel)]="nom" />
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button" (click)="searchNom()">
+            Rechercher
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <br>
+      <h4 class="text-center">Listes des produits</h4>
+      <br>
+      <ul class="list-group">
+        <li class="list-group-item cursor" *ngFor="let product of products; let i = index" [class.active]="i == currentIndex"
+          (click)="saveActiveProduct(product, i)">
+          {{ product.nom }}
+        </li>
+      </ul>
+
+      <button class="m-3 btn btn-sm btn-danger" (click)="removeAllProducts()">
+        Supprimer tous
+      </button>
+    </div>
+    <div class="col-md-6">
+      <div *ngIf="currentProduct">
+        <br><br>
+        <h4>Produit</h4>
+        <div>
+          <label><strong>Nom:</strong></label> {{ currentProduct.nom }}
+        </div>
+        <div>
+          <label><strong>Description:</strong></label>
+          {{ currentProduct.description }}
+        </div>
+
+        <div>
+          <label><strong>Prix:</strong></label>
+          {{ currentProduct.prix}}
+        </div>
+
+        <div>
+          <label><strong>Status:</strong></label>
+          {{ currentProduct.published ? "Published" : "Pending" }}
+        </div>
+        <br>
+        <a class="btn btn-primary" routerLink="/products/details" >
+          Edit
+        </a>
+      </div>
+
+      <div *ngIf="!currentProduct">
+        <br><br><br><br>
+        <p>Veillez selectioner un produit pour afficher ces détails...</p>
+      </div>
+    </div>
+    <h4>{{fromChild}}</h4>
+  </div>

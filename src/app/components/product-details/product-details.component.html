@@ -1,0 +1,43 @@
+<div *ngIf="currentProduct.nom" class="edit-form">
+    <h4>Product</h4>
+    <form>
+      <div class="form-group">
+        <label for="nom">Nom</label>
+        <input type="text" 
+        class="form-control" 
+        id="nom" 
+        [(ngModel)]="currentProduct.nom" 
+        name="nom">
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" class="form-control" id="description" [(ngModel)]="currentProduct.description" name="description">
+      </div>
+      <div class="form-group">
+        <label for="prix">Prix</label>
+        <input type="number" class="form-control" id="prix" [(ngModel)]="currentProduct.prix" name="prix">
+      </div>
+      <div class="form-group">
+        <label><strong>Status:</strong></label>
+        {{ currentProduct.published ? "Published" : "Pending" }}
+      </div>
+      <button class="badge" *ngIf="currentProduct.published" (click)="updatePublication(false)">
+        Non publier
+      </button>
+      <button *ngIf="!currentProduct.published" class="badge" (click)="updatePublication(true)">
+        Publier
+      </button>
+      <button class="badge" (click)="deleteProduct()">
+        Supprimer
+      </button>
+      <button type="submit" class="badge badge-success mb-2" (click)="updateProduct()">
+        Mettre à jour
+      </button>
+    </form>
+    <p>{{ message }}</p>
+  </div>
+  <div *ngIf="!currentProduct.nom">
+    <br />
+    
+    <p> Impossible d'accéder à ce produit...taher </p>
+  </div>
